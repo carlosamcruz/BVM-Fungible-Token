@@ -39,32 +39,6 @@ The contract enables common fungible token operations such as **split (unit divi
 
 ---
 
-## 🧪 Deployment and Testing
-
-### Prerequisites:
-
-* Run `npm install` to install dependencies.
-* Configure **Alice’s private key** and **Oracle’s private keys** in a `.env` file.
-* Deploy to **local sCrypt node** or **BSV testnet**.
-
-### Testing Procedure:
-
-1. **Deployment:**
-   Initialize the contract with `totalSupply`, `oraclePubKey`, and `alicePubKeyHash`.
-
-2. **Method Execution:**
-
-   * Test `splitUnits()` by providing the oracle signature.
-   * Test `mergeUnits()` to combine token units.
-   * Test `meltUnits()` to burn tokens.
-
-3. **Output Validation:**
-
-   * Check all output hashes (`ctx.hashOutputs`).
-   * Use the contract's internal `console.log` statements for debugging and traceability.
-
----
-
 ## ⚠️ Important Notes:
 
 * **UTXO Output Limit:**

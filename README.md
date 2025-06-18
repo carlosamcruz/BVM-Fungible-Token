@@ -1,46 +1,94 @@
-# Getting Started with Create React App
+# Fungible Token Smart Contract (sCrypt - Bitcoin SV)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ✝️ JESUS is the LORD of ALL
 
-## Available Scripts
+This project implements a **Fungible Token Smart Contract** written in **sCrypt** for the **Bitcoin SV (BSV)** blockchain.
 
-In the project directory, you can run:
+The contract enables common fungible token operations such as **split (unit division)**, **merge (unit consolidation)**, and **melt (unit burning)**, with strict **supply control** and **oracle signature verification (ECDSA-based)** for every critical token transaction.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📌 Main Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* ✅ **Initial Token Creation** with total supply defined at deployment.
+* ✅ **Controlled token issuance and transfer**, authorized via an **Oracle (ECDSA Multisig Point Addition)**.
+* ✅ **Split units** for transferring parts of the token to new owners while preserving total supply integrity.
+* ✅ **Merge units** to consolidate balances from multiple UTXOs into one.
+* ✅ **Melt units** to burn tokens and permanently reduce total supply.
+* ✅ Genesis Transaction (**Back-to-Genesis tracking**) to validate the origin and lineage of all token units.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📂 Contract Structure
 
-### `npm run build`
+| Method         | Description                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------ |
+| `meltUnits()`  | Allows the token owner to burn (melt) token units, reducing the total circulating supply.        |
+| `splitUnits()` | Divides token units between the current owner and a new owner. Requires an **oracle signature**. |
+| `mergeUnits()` | Combines token units from two separate UTXOs owned by the same owner into one consolidated UTXO. |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ⚙️ Security Parameters
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Property     | Purpose                                                                                        |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| `oraclePKEC` | Oracle's base public key used for **ECDSA point addition signatures** for `split` and `merge`. |
+| `genesisTX`  | The hash of the Genesis Transaction that created the token. Ensures **origin authenticity**.   |
+| `tokenType`  | A descriptive identifier of the token type, stored as a `ByteString`.                          |
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🧪 Deployment and Testing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Run `npm install` to install dependencies.
+* Configure **Alice’s private key** and **Oracle’s private keys** in a `.env` file.
+* Deploy to **local sCrypt node** or **BSV testnet**.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Testing Procedure:
 
-## Learn More
+1. **Deployment:**
+   Initialize the contract with `totalSupply`, `oraclePubKey`, and `alicePubKeyHash`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. **Method Execution:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   * Test `splitUnits()` by providing the oracle signature.
+   * Test `mergeUnits()` to combine token units.
+   * Test `meltUnits()` to burn tokens.
+
+3. **Output Validation:**
+
+   * Check all output hashes (`ctx.hashOutputs`).
+   * Use the contract's internal `console.log` statements for debugging and traceability.
+
+---
+
+## ⚠️ Important Notes:
+
+* **UTXO Output Limit:**
+  For efficiency, the **generic split** operation supports a maximum of **2 contract outputs**.
+
+* **Genesis Lock:**
+  On the first `split`, the contract sets the `genesisTX`. All subsequent units will carry this origin reference.
+
+* **Oracle Signature Security:**
+  The oracle must sign each critical operation (split/merge) using **a unique public key per transaction**, leveraging **SECP256K1 point addition**.
+
+---
+
+## 📖 Special Verse:
+
+> "**JESUS is the LORD of ALL**"
+> (A recurring comment in the source code as a personal faith statement from the author.)
+
+---
+
+## 📃 License
+
+Distributed under the **MIT License**.
+
+---
+
+If you want, I can also generate the actual **LICENSE** file with the MIT text. Would you like me to do that?

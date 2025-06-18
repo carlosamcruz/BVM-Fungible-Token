@@ -88,7 +88,3 @@ The contract enables common fungible token operations such as **split (unit divi
 ## 📃 License
 
 Distributed under the **MIT License**.
-
----
-
-If you want, I can also generate the actual **LICENSE** file with the MIT text. Would you like me to do that?

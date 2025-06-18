@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "errors": [],
+  "scryptfile": "Fungible.scrypt",
+  "sourceMapFile": "Fungible.scrypt.map",
+  "ctxMethods": [
+    "meltUnits",
+    "splitUnits",
+    "mergeUnits"
+  ]
+}
